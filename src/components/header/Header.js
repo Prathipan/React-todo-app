@@ -40,9 +40,12 @@ const Header = () => {
     
 
 
-  const deleteTask = (index) => {
-    fetch( `https://61efbd81732d93001778e565.mockapi.io/todo/${index+1}` ,{method : "DELETE"} )
-      .then(() => getTaskDetail());
+  const deleteTask = (id) => {
+    fetch( `https://61efbd81732d93001778e565.mockapi.io/todo/${id}` ,{method : "DELETE"} )
+      .then(() => {
+        getTaskDetail();
+        console.log("delete called")
+      });
   }
 
   const updateTask = (task,id) => {

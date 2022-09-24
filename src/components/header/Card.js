@@ -3,7 +3,7 @@ import EditTask from "./EditTask";
 
 const Card = ({todo , index,deleteTask,updateTask}) => {
 
-  const {task , description} = todo;
+  const {task , description,id} = todo;
   const [show , setShow] = useState(false);
 
   const handleShow = () => setShow(true);
@@ -32,10 +32,12 @@ const Card = ({todo , index,deleteTask,updateTask}) => {
   ];
 
     const handleDelete = () => {
-       deleteTask(index);
+       deleteTask(id);
+      // console.log(id);
     }
     
     const handleUpdate = (task,id) => {
+      // console.log(task,id)
         updateTask(task,id);
     }
 
