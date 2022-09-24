@@ -1,8 +1,12 @@
-import React from "react";
+import React,{useState} from "react";
+import EditTask from "./EditTask";
 
-const Card = ({todo , index}) => {
+const Card = ({todo , index,deleteTask,updateTask}) => {
 
-    const {task , description} = todo;
+  const {task , description} = todo;
+  const [show , setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
 
   const colors = [
     {
@@ -27,7 +31,16 @@ const Card = ({todo , index}) => {
     },
   ];
 
+    const handleDelete = () => {
+       deleteTask(index);
+    }
+    
+    const handleUpdate = (task,id) => {
+        updateTask(task,id);
+    }
+
   return (
+    <>  
     <div className="card-wrapper m-3">
       <div className="card-top" style={{"backgroundColor": colors[index%5].primaryColor}}></div>
       <div className="task-holder">
@@ -35,11 +48,13 @@ const Card = ({todo , index}) => {
         <p className="mt-3 p-3">{description}</p>
 
         <div className="task-icons" style={{"color": colors[index%5].primaryColor}}>
-          <i className="uil uil-edit task-icon"></i>
-          <i className="uil uil-trash-alt task-icon"></i>
+          <i className="uil uil-edit task-icon" onClick={handleShow}></i>
+          <i className="uil uil-trash-alt task-icon" onClick={handleDelete}></i>
         </div>
       </div>
     </div>
+    <EditTask show={show} setShow={setShow} todo={todo} updateFunc = {handleUpdate} />
+    </>
   );
 };
 
