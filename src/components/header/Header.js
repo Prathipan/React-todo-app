@@ -18,7 +18,7 @@ const Header = () => {
     // }
     
     
-    useEffect(() => getTaskDetail ,[]);
+    useEffect(() => getTaskDetail() ,[]);
 
 
     const getTaskDetail = () => {
