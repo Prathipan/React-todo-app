@@ -1,11 +1,11 @@
+
 import { useFormik } from "formik";
-import React from "react";
 import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import * as yup from 'yup'
 
-const CreateTask = ({save ,show, setShow }) => {
+const CreateTask = ({show, setShow,saveFunc }) => {
  
   const todoValidationSchema = yup.object({
     task : yup.string().required("*Task is required"),
@@ -19,7 +19,8 @@ const CreateTask = ({save ,show, setShow }) => {
     },
     validationSchema : todoValidationSchema,
     onSubmit : (task , {resetForm}) => {
-      save(task);
+      saveFunc(task);
+      setShow(false);
       resetForm({values:""});
     }
   })
@@ -31,7 +32,7 @@ const CreateTask = ({save ,show, setShow }) => {
       <Modal.Header closeButton>
         <Modal.Title>Create Task</Modal.Title>
       </Modal.Header>
-      <form className="m-3" onSubmit={formik.handleSubmit}>
+      <Form className="m-3" onSubmit={formik.handleSubmit}>
         <Form.Group className="m-2">
           <input
             className="form-control"
@@ -65,7 +66,7 @@ const CreateTask = ({save ,show, setShow }) => {
           Submit
         </Button>
       </Modal.Footer>
-      </form>
+      </Form>
     </Modal>
   );
 };
